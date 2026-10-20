@@ -1,0 +1,359 @@
+{
+  "groups": {
+    "suite_all": {
+      "human": "Full test suite",
+      "pytest_args": [
+        "tests/"
+      ],
+      "status": "PASSED",
+      "exit_code": 0,
+      "summary": "======================== 34 passed, 1 warning in 0.80s =========================",
+      "stdout_tail": [
+        "============================= test session starts ==============================",
+        "collected 34 items",
+        "tests/test_s01_normal.py .                                               [  2%]",
+        "tests/test_s02_shutdown_blocks.py ..                                     [  8%]",
+        "tests/test_s03_restart.py .                                              [ 11%]",
+        "tests/test_s04_stale_auth.py ..                                          [ 17%]",
+        "tests/test_s05_race.py ...                                               [ 26%]",
+        "tests/test_s06_concurrent.py ..                                          [ 32%]",
+        "tests/test_s07_retry.py ..                                               [ 38%]",
+        "tests/test_s08_alt_route.py ...                                          [ 47%]",
+        "tests/test_s09_recovery.py .                                             [ 50%]",
+        "tests/test_s10_mutants.py ..........                                     [ 79%]",
+        "tests/test_s11_evidence.py ....                                          [ 91%]",
+        "tests/test_s12_budget.py ...                                             [100%]",
+        "=============================== warnings summary ===============================",
+        ".venv/lib/python3.14/site-packages/fastapi/testclient.py:1",
+        "  /Users/akhileshwarik/ai-killswitch-harness/.venv/lib/python3.14/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.",
+        "    from starlette.testclient import TestClient as TestClient  # noqa",
+        "-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html",
+        "======================== 34 passed, 1 warning in 0.80s ========================="
+      ],
+      "stderr_tail": []
+    },
+    "restart": {
+      "human": "Real process restart",
+      "pytest_args": [
+        "tests/test_s03_restart.py"
+      ],
+      "status": "PASSED",
+      "exit_code": 0,
+      "summary": "============================== 1 passed in 0.19s ===============================",
+      "stdout_tail": [
+        "============================= test session starts ==============================",
+        "collected 1 item",
+        "tests/test_s03_restart.py .                                              [100%]",
+        "============================== 1 passed in 0.19s ==============================="
+      ],
+      "stderr_tail": []
+    },
+    "race": {
+      "human": "Deterministic in-flight race",
+      "pytest_args": [
+        "tests/test_s05_race.py"
+      ],
+      "status": "PASSED",
+      "exit_code": 0,
+      "summary": "============================== 3 passed in 0.05s ===============================",
+      "stdout_tail": [
+        "============================= test session starts ==============================",
+        "collected 3 items",
+        "tests/test_s05_race.py ...                                               [100%]",
+        "============================== 3 passed in 0.05s ==============================="
+      ],
+      "stderr_tail": []
+    },
+    "concurrent": {
+      "human": "Concurrent actions and budget",
+      "pytest_args": [
+        "tests/test_s06_concurrent.py",
+        "tests/test_s12_budget.py"
+      ],
+      "status": "PASSED",
+      "exit_code": 0,
+      "summary": "============================== 5 passed in 0.09s ===============================",
+      "stdout_tail": [
+        "============================= test session starts ==============================",
+        "collected 5 items",
+        "tests/test_s06_concurrent.py ..                                          [ 40%]",
+        "tests/test_s12_budget.py ...                                             [100%]",
+        "============================== 5 passed in 0.09s ==============================="
+      ],
+      "stderr_tail": []
+    },
+    "mutants": {
+      "human": "Broken-control mutants",
+      "pytest_args": [
+        "tests/test_s10_mutants.py"
+      ],
+      "status": "PASSED",
+      "exit_code": 0,
+      "summary": "============================== 10 passed in 0.23s ==============================",
+      "stdout_tail": [
+        "============================= test session starts ==============================",
+        "collected 10 items",
+        "tests/test_s10_mutants.py ..........                                     [100%]",
+        "============================== 10 passed in 0.23s =============================="
+      ],
+      "stderr_tail": []
+    },
+    "evidence": {
+      "human": "Evidence integrity and freshness",
+      "pytest_args": [
+        "tests/test_s11_evidence.py"
+      ],
+      "status": "PASSED",
+      "exit_code": 0,
+      "summary": "============================== 4 passed in 0.06s ===============================",
+      "stdout_tail": [
+        "============================= test session starts ==============================",
+        "collected 4 items",
+        "tests/test_s11_evidence.py ....                                          [100%]",
+        "============================== 4 passed in 0.06s ==============================="
+      ],
+      "stderr_tail": []
+    },
+    "api": {
+      "human": "API route enforcement",
+      "pytest_args": [
+        "tests/test_s08_alt_route.py"
+      ],
+      "status": "PASSED",
+      "exit_code": 0,
+      "summary": "========================= 3 passed, 1 warning in 0.23s =========================",
+      "stdout_tail": [
+        "============================= test session starts ==============================",
+        "collected 3 items",
+        "tests/test_s08_alt_route.py ...                                          [100%]",
+        "=============================== warnings summary ===============================",
+        ".venv/lib/python3.14/site-packages/fastapi/testclient.py:1",
+        "  /Users/akhileshwarik/ai-killswitch-harness/.venv/lib/python3.14/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.",
+        "    from starlette.testclient import TestClient as TestClient  # noqa",
+        "-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html",
+        "========================= 3 passed, 1 warning in 0.23s ========================="
+      ],
+      "stderr_tail": []
+    },
+    "stale_auth": {
+      "human": "Stale authorization classification",
+      "pytest_args": [
+        "tests/test_s04_stale_auth.py"
+      ],
+      "status": "PASSED",
+      "exit_code": 0,
+      "summary": "============================== 2 passed in 0.04s ===============================",
+      "stdout_tail": [
+        "============================= test session starts ==============================",
+        "collected 2 items",
+        "tests/test_s04_stale_auth.py ..                                          [100%]",
+        "============================== 2 passed in 0.04s ==============================="
+      ],
+      "stderr_tail": []
+    }
+  },
+  "mutants": {
+    "status": "PASSED",
+    "rows": [
+      {
+        "id": "M1",
+        "description": "no_persist \u2014 TRIP not written to disk",
+        "invariant": "Kill-switch state must survive process restart",
+        "test": "test_m1_no_persist_detected",
+        "expected": "PASSED",
+        "observed": "PASSED",
+        "detected": true
+      },
+      {
+        "id": "M2",
+        "description": "skip_commit_check \u2014 commit boundary ignores switch",
+        "invariant": "Commit must reject when switch state != ARMED",
+        "test": "test_m2_skip_commit_check_detected",
+        "expected": "PASSED",
+        "observed": "PASSED",
+        "detected": true
+      },
+      {
+        "id": "M3",
+        "description": "recover_clears \u2014 recover() ignores the token",
+        "invariant": "Recovery must require the operator token",
+        "test": "test_m3_recover_clears_detected",
+        "expected": "PASSED",
+        "observed": "PASSED",
+        "detected": true
+      },
+      {
+        "id": "M4",
+        "description": "alt_bypass \u2014 alternate route bypasses commit",
+        "invariant": "Every route must reach the same guarded commit function",
+        "test": "test_m4_alt_bypass_detected",
+        "expected": "PASSED",
+        "observed": "PASSED",
+        "detected": true
+      },
+      {
+        "id": "M5",
+        "description": "ignore_epoch \u2014 commit ignores decision epoch",
+        "invariant": "Decision epoch must match current switch epoch",
+        "test": "test_m5_ignore_epoch_detected",
+        "expected": "PASSED",
+        "observed": "PASSED",
+        "detected": true
+      },
+      {
+        "id": "M6",
+        "description": "dup_retry \u2014 idempotency short-circuit removed",
+        "invariant": "Repeated requests with the same key must not re-execute",
+        "test": "test_m6_dup_retry_detected",
+        "expected": "PASSED",
+        "observed": "PASSED",
+        "detected": true
+      },
+      {
+        "id": "M7",
+        "description": "idempotency_different_payload \u2014 key reused with a different amount",
+        "invariant": "Idempotency key must be bound to the original request payload",
+        "test": "test_m7_different_payload_detected",
+        "expected": "PASSED",
+        "observed": "PASSED",
+        "detected": true
+      },
+      {
+        "id": "M8",
+        "description": "reuse_consumed_auth \u2014 same decision reused for a second commit",
+        "invariant": "A decision nonce can be consumed at most once",
+        "test": "test_m8_reuse_consumed_detected",
+        "expected": "PASSED",
+        "observed": "PASSED",
+        "detected": true
+      },
+      {
+        "id": "M9",
+        "description": "budget_overspend \u2014 atomic guard on budget removed",
+        "invariant": "Budget must never go negative under any sequence of commits",
+        "test": "test_m9_budget_overspend_detected",
+        "expected": "PASSED",
+        "observed": "PASSED",
+        "detected": true
+      },
+      {
+        "id": "M10",
+        "description": "stale_evidence_pass \u2014 verifier ignores staleness window",
+        "invariant": "Evidence older than the staleness window must be INCONCLUSIVE, not PASS",
+        "test": "test_m10_stale_evidence_detected",
+        "expected": "PASSED",
+        "observed": "PASSED",
+        "detected": true
+      }
+    ],
+    "matrix": {
+      "M1": {
+        "id": "M1",
+        "description": "no_persist \u2014 TRIP not written to disk",
+        "invariant": "Kill-switch state must survive process restart",
+        "test": "test_m1_no_persist_detected",
+        "expected": "PASSED",
+        "observed": "PASSED",
+        "detected": true
+      },
+      "M2": {
+        "id": "M2",
+        "description": "skip_commit_check \u2014 commit boundary ignores switch",
+        "invariant": "Commit must reject when switch state != ARMED",
+        "test": "test_m2_skip_commit_check_detected",
+        "expected": "PASSED",
+        "observed": "PASSED",
+        "detected": true
+      },
+      "M3": {
+        "id": "M3",
+        "description": "recover_clears \u2014 recover() ignores the token",
+        "invariant": "Recovery must require the operator token",
+        "test": "test_m3_recover_clears_detected",
+        "expected": "PASSED",
+        "observed": "PASSED",
+        "detected": true
+      },
+      "M4": {
+        "id": "M4",
+        "description": "alt_bypass \u2014 alternate route bypasses commit",
+        "invariant": "Every route must reach the same guarded commit function",
+        "test": "test_m4_alt_bypass_detected",
+        "expected": "PASSED",
+        "observed": "PASSED",
+        "detected": true
+      },
+      "M5": {
+        "id": "M5",
+        "description": "ignore_epoch \u2014 commit ignores decision epoch",
+        "invariant": "Decision epoch must match current switch epoch",
+        "test": "test_m5_ignore_epoch_detected",
+        "expected": "PASSED",
+        "observed": "PASSED",
+        "detected": true
+      },
+      "M6": {
+        "id": "M6",
+        "description": "dup_retry \u2014 idempotency short-circuit removed",
+        "invariant": "Repeated requests with the same key must not re-execute",
+        "test": "test_m6_dup_retry_detected",
+        "expected": "PASSED",
+        "observed": "PASSED",
+        "detected": true
+      },
+      "M7": {
+        "id": "M7",
+        "description": "idempotency_different_payload \u2014 key reused with a different amount",
+        "invariant": "Idempotency key must be bound to the original request payload",
+        "test": "test_m7_different_payload_detected",
+        "expected": "PASSED",
+        "observed": "PASSED",
+        "detected": true
+      },
+      "M8": {
+        "id": "M8",
+        "description": "reuse_consumed_auth \u2014 same decision reused for a second commit",
+        "invariant": "A decision nonce can be consumed at most once",
+        "test": "test_m8_reuse_consumed_detected",
+        "expected": "PASSED",
+        "observed": "PASSED",
+        "detected": true
+      },
+      "M9": {
+        "id": "M9",
+        "description": "budget_overspend \u2014 atomic guard on budget removed",
+        "invariant": "Budget must never go negative under any sequence of commits",
+        "test": "test_m9_budget_overspend_detected",
+        "expected": "PASSED",
+        "observed": "PASSED",
+        "detected": true
+      },
+      "M10": {
+        "id": "M10",
+        "description": "stale_evidence_pass \u2014 verifier ignores staleness window",
+        "invariant": "Evidence older than the staleness window must be INCONCLUSIVE, not PASS",
+        "test": "test_m10_stale_evidence_detected",
+        "expected": "PASSED",
+        "observed": "PASSED",
+        "detected": true
+      }
+    },
+    "exit_code": 0,
+    "stdout_tail": [
+      "============================= test session starts ==============================",
+      "collecting ... collected 10 items",
+      "tests/test_s10_mutants.py::test_m1_no_persist_detected PASSED            [ 10%]",
+      "tests/test_s10_mutants.py::test_m2_skip_commit_check_detected PASSED     [ 20%]",
+      "tests/test_s10_mutants.py::test_m3_recover_clears_detected PASSED        [ 30%]",
+      "tests/test_s10_mutants.py::test_m4_alt_bypass_detected PASSED            [ 40%]",
+      "tests/test_s10_mutants.py::test_m5_ignore_epoch_detected PASSED          [ 50%]",
+      "tests/test_s10_mutants.py::test_m6_dup_retry_detected PASSED             [ 60%]",
+      "tests/test_s10_mutants.py::test_m7_different_payload_detected PASSED     [ 70%]",
+      "tests/test_s10_mutants.py::test_m8_reuse_consumed_detected PASSED        [ 80%]",
+      "tests/test_s10_mutants.py::test_m9_budget_overspend_detected PASSED      [ 90%]",
+      "tests/test_s10_mutants.py::test_m10_stale_evidence_detected PASSED       [100%]",
+      "============================== 10 passed in 0.23s =============================="
+    ]
+  },
+  "overall": "PASSED"
+}

@@ -1,0 +1,28 @@
+# Optional Docker Compose convenience. Not required to run the harness.
+#
+#   docker compose up --build
+#   curl http://127.0.0.1:8000/health
+#
+# State persists in ./data/harness.db on the host so it survives container
+# restarts. HARNESS_ENV=dev disables /reset; use HARNESS_ENV=test only in an
+# ephemeral test environment.
+
+services:
+  harness:
+    image: python:3.11-slim
+    working_dir: /app
+    volumes:
+      - ./:/app:ro
+      - ./data:/data
+    environment:
+      HARNESS_ENV: dev
+      HARNESS_DB_PATH: /data/harness.db
+      HARNESS_POLICY_VERSION: policy-v1
+      HARNESS_INITIAL_BUDGET_MINOR: "10000"
+      RECOVERY_TOKEN: change-me-in-real-deployments
+    ports:
+      - "127.0.0.1:8000:8000"
+    command: >
+      sh -c "pip install --no-cache-dir -r requirements.txt &&
+             PYTHONPATH=src python -m uvicorn harness.app:create_app
+             --factory --host 0.0.0.0 --port 8000"
