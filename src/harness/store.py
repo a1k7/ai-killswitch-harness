@@ -88,6 +88,16 @@ _SCHEMA_STATEMENTS: list[str] = [
         hash TEXT NOT NULL
     )
     """,
+        """
+    CREATE TABLE IF NOT EXISTS inflight_operations (
+        operation_id TEXT PRIMARY KEY,
+        decision_id TEXT NOT NULL,
+        admitted_epoch INTEGER NOT NULL,
+        admitted_at_us INTEGER NOT NULL,
+        terminal_outcome TEXT,
+        terminal_at_us INTEGER
+    )
+    """,
 ]
 
 

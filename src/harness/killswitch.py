@@ -3,16 +3,24 @@
 TRIP and RECOVER increment the epoch so previously-issued decisions become
 STALE_EPOCH at the commit boundary. RECOVER requires an operator token; a
 restart, health check, or timeout NEVER implicitly clears TRIPPED.
+
+TRIP also fans out cooperative cancellation requests to any registered
+in-flight operations. This is a request, not a guarantee that the workers
+stopped. The commit boundary remains authoritative.
 """
 from __future__ import annotations
 
 import hmac
+from typing import TYPE_CHECKING
 
 from .audit import AuditChain
 from .clock import Clock
 from .errors import ReasonCode
 from .schemas import SwitchState, SwitchStatus
 from .store import DurableStateStore
+
+if TYPE_CHECKING:
+    from .inflight import InFlightRegistry
 
 
 class KillSwitchController:
@@ -22,10 +30,12 @@ class KillSwitchController:
         clock: Clock,
         *,
         recovery_token: str,
+        inflight: "InFlightRegistry | None" = None,
     ) -> None:
         self.store = store
         self.clock = clock
         self.recovery_token = recovery_token
+        self.inflight = inflight
 
     def status(self) -> SwitchStatus:
         return self.store.get_switch()
@@ -55,6 +65,8 @@ class KillSwitchController:
                 },
                 ts_us=now_us,
             )
+            if self.inflight is not None:
+                self.inflight.cancel_all(conn, now_us)
             return SwitchStatus(
                 state=SwitchState.TRIPPED,
                 epoch=new_epoch,

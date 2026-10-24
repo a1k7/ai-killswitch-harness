@@ -1,7 +1,6 @@
 """Shared pytest fixtures. Deterministic clock; isolated temp DB per test."""
 from __future__ import annotations
 
-import os
 from pathlib import Path
 
 import pytest
@@ -9,6 +8,7 @@ import pytest
 from harness.authz import AuthorizationService
 from harness.clock import ManualClock
 from harness.config import Settings
+from harness.inflight import InFlightRegistry
 from harness.killswitch import KillSwitchController
 from harness.store import DurableStateStore
 
@@ -38,10 +38,17 @@ def authz(store: DurableStateStore, clock: ManualClock) -> AuthorizationService:
 
 
 @pytest.fixture
+def inflight(store: DurableStateStore, clock: ManualClock) -> InFlightRegistry:
+    return InFlightRegistry(store, clock)
+
+
+@pytest.fixture
 def killswitch(
-    store: DurableStateStore, clock: ManualClock
+    store: DurableStateStore, clock: ManualClock, inflight: InFlightRegistry
 ) -> KillSwitchController:
-    return KillSwitchController(store, clock, recovery_token=TEST_RECOVERY_TOKEN)
+    return KillSwitchController(
+        store, clock, recovery_token=TEST_RECOVERY_TOKEN, inflight=inflight,
+    )
 
 
 @pytest.fixture

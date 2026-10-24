@@ -27,6 +27,10 @@ class ReasonCode(str, Enum):
     RECOVERY_UNAUTHORIZED = "recovery_unauthorized"
     RECOVERY_NOT_TRIPPED = "recovery_not_tripped"
 
+    # in-flight cancellation
+    INFLIGHT_CANCELLED = "inflight_cancelled"
+    INFLIGHT_DENIED = "inflight_denied"
+
     # budget
     BUDGET_EXCEEDED = "budget_exceeded"
 
